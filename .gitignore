@@ -54,3 +54,17 @@ glass/
 # allow for individual starter page
 ##########################################################
 /index.html
+
+# Dolores
+/Dolores/*.aux
+/Dolores/*.ps
+/Dolores/*.dvi
+/Dolores/*.pdf
+/Dolores/curve.1
+/Dolores/curve.2
+/Dolores/curve.3
+/Dolores/curve.4
+/Dolores/curve.5
+/Dolores/curve.6
+/Dolores/curve.7
+/Dolores/curve.8
