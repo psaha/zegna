@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ifpdf}
+\ifpdf
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+\begin{document}
+
+\section{Drawing curves using MetaPost}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.1}
+\caption{Simple line}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.2}
+\caption{Straight lines through 5 points}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.3}
+\caption{Smooth curve through five points (Bezier cubic)}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.4}
+\caption{Smooth closed curve through 5 points (Bezier cubic)}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.5}
+\caption{Smooth curve through five points with vertical extrema at $z_1$ and horizontal extrema at $z_2$}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.6}
+\caption{Smooth curve through five points such that the tangent direction at $z_1$ is parallel to the vector $z_2-z_0$}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.7}
+\caption{Curve family: Move outward from $z_0$ at an angle of $60^\circ$, and approach $z_1$ at angles between $-10^\circ$ and $-90^\circ$}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{curve.8}
+\caption{Curve family: Move outward from $z_0$ at an angle of $60^\circ$, and approach $z_1$ at angles between $10^\circ$ and $90^\circ$}
+\end{center}
+\end{figure}
+
+\end{document}
