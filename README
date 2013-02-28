@@ -3,10 +3,9 @@ This is a group project, where we will
 (a) learn the Metapost/Metafont programming language, and
 (b) use it to produce sewing patterns.
 
-Next meeting: Thursday 28 Feb at 16:00.
-Location: provisionally 36 J 33.
+Next meeting: Thursday 7 March at 16:00.
+Location: 36 J 33.
 
-First assignment: work out how to run Metapost and draw some simple
-curves.  (Metapost free and included in recent TeX distributions, such
-TeXLive.)
+Current assignment: Make a simple sewing pattern using Metapost and
+try to introduce one or more parameters.
 
