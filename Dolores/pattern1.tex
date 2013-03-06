@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{ifpdf}
+\ifpdf
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+\begin{document}
+
+\section*{Drawing a pattern}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{pattern.1}
+\caption{Cape: Varying the bottom part}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{pattern.2}
+\caption{Cape: Varying the angle determining the width of the cape}
+\end{center}
+\end{figure}
+
+\end{document}
