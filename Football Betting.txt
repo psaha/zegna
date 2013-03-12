@@ -1,0 +1,14 @@
+In football betting there are a variety of markets concerning the final outcome on which a punter may stake (e.g. the match winner, the winner over a handicap, the total number of goals, the exact score etc). The probability of each outcome on any of these markets though is dependent on the probability distribution of the exact scores in that game.
+ 
+ 
+This site http://www.oddschecker.com/football/english/premier-league/ provides you with odds on a range of football games. By clicking on “All Odds”, you can check the odds as they are currently offered by a variety of bookmakers on various markets. Focusing on the markets that we find interesting, we can develop a theoretical model on the distribution of exact scores that would, in our opinion, fit all the different markets best, formalize it, and justify our choice.
+ 
+The model ideally would be derived from a subset of the markets.
+
+The model would give the probability distribution of the correct score so that the probability for any other market can be derived.
+
+The model would define the expected scoring rate of each team for that game.
+
+Any parameterization of the model would be defined using only information from the odds markets.
+ 
+
