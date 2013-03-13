@@ -1,0 +1,65 @@
+%!PS
+%%BoundingBox: -1 -1 26 58 
+%%HiResBoundingBox: -0.04982 -0.04982 25.04982 57.04982 
+%%Creator: MetaPost 1.504
+%%CreationDate: 2013.03.13:2228
+%%Pages: 1
+%%BeginProlog
+%%EndProlog
+%%Page: 1 1
+ 0 0 0 setrgbcolor 0 0.09962 dtransform truncate idtransform setlinewidth pop [] 0 setdash 1 setlinecap
+ 1 setlinejoin 10 setmiterlimit
+newpath 0 45 moveto
+5.54274 45.68057 8.02872 51.58401 10 57 curveto stroke
+newpath 0 43 moveto
+6.26292 43.769 9.78024 49.90134 12 56 curveto stroke
+ 0.09962 0 dtransform exch truncate exch idtransform pop setlinewidth
+newpath 0 0 moveto
+0 45 lineto stroke
+ 1 0 0 setrgbcolor 0 0.09962 dtransform truncate idtransform setlinewidth pop
+newpath 0 0 moveto
+24 0 lineto stroke
+newpath 0 2 moveto
+24 2 lineto stroke
+newpath 10 57 moveto
+20 52 lineto stroke
+newpath 20 52 moveto
+18.33015 42.52975 16.76585 31.67549 25 29 curveto stroke
+newpath 25 29 moveto
+23.99435 23.29662 21.49309 17.79399 22 12 curveto stroke
+newpath 22 12 moveto
+21.69763 8.54405 24.30237 5.45595 24 2 curveto stroke
+newpath 24 2 moveto
+24.15176 3.73454 24 1.0767 24 0 curveto stroke
+ 0 0 1 setrgbcolor
+newpath 0 1 moveto
+22 1 lineto stroke
+newpath 0 3 moveto
+22 3 lineto stroke
+newpath 9.8 56.65 moveto
+19 52 lineto stroke
+newpath 19 52 moveto
+17.41745 43.02481 14.06834 32.57721 22 30 curveto stroke
+newpath 22 30 moveto
+21.00464 24.35493 19.49939 18.72195 20 13 curveto stroke
+newpath 20 13 moveto
+19.69763 9.54405 22.30237 6.45595 22 3 curveto stroke
+newpath 22 3 moveto
+22.15176 4.73454 22 2.0767 22 1 curveto stroke
+ 0 0 0 setrgbcolor
+newpath 0 2 moveto
+20 2 lineto stroke
+newpath 0 4 moveto
+20 4 lineto stroke
+newpath 9.7 56.15 moveto
+18 52 lineto stroke
+newpath 18 52 moveto
+16.49744 43.47841 12.33751 33.48975 20 31 curveto stroke
+newpath 20 31 moveto
+19.00464 25.35493 17.49939 19.72195 18 14 curveto stroke
+newpath 18 14 moveto
+17.69763 10.54405 20.30237 7.45595 20 4 curveto stroke
+newpath 20 4 moveto
+20.15176 5.73454 20 3.0767 20 2 curveto stroke
+showpage
+%%EOF
