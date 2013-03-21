@@ -6,3 +6,7 @@ Then a webpage with some links to pages with free patterns:
 http://www.amenita.de/partner-familie/freizeit/kostenlose-schnittmuster-in-huelle-und-fuelle-zum-herunterladen/
 
 Thought that could be useful for our project!
+
+Here is a webpage with links to different pattern creating programs: 
+http://www.schneiderlinks.com/index.php?cat=4
+Looks like there exist already many different programs!
