@@ -45,7 +45,7 @@ enddef;
 %===============================================================================
 
 %========================================		
-% Entering the measurements
+% Entering the measurements in cm
 %========================================
 Neck := 30.385;
 Waist := 69.29;
@@ -53,7 +53,8 @@ Chest := 86.36;
 Hip := 101.6;
 Length := 101.6;
 Shoulder := 8.382; % This is of 1 side taking from the neck to the end of shoulder
-ArmHole := 17.78;
+ArmHole := 17.78; % it is taken from the back side
+
 %========================================
 %scaling to quarter portion
 %========================================
