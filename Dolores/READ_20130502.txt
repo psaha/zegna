@@ -1,0 +1,11 @@
+I implemented a very simple modification of the sleeve curves in order to adjust the arc lengths of the front/back part with the corresponding sleeve part.
+
+Results: 
+1) If the arc lengths differ too much, the shape of the sleeve is not nice any more.
+2) Algorithm to adjust the curve fails sometimes
+
+--> We have to talk about what we could improve!
+
+Suggestions what to do:
+1) It is very important that the drafting of the front/back part and of the sleeve is done in a good way. We should really focus on a good drafting!
+2) Use of better optimization methods for the adjustment of the sleeve.
