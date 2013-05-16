@@ -1,5 +1,8 @@
 %% Bodice sloper
-%% Based on http://www.madalynne.com/how-to-draft-a-sleeve-sloper-update
+%% Based on 
+%% http://www.madalynne.com/how-to-draft-a-sleeve-sloper-update
+%% http://www.madalynne.com/how-to-draft-a-front-bodice-sloper-update
+%% http://www.madalynne.com/how-to-draft-a-back-bodice-sloper-update
 
 input sarith;
 
@@ -27,6 +30,14 @@ side_seam_l     := 23*cm*t;
 waist_arc       := 27*cm*t;
 dart_pl         := bust_span - 3/4*inch;
 
+% Back
+full_l_b          := 46*cm*t;   % NEW!!!
+cb_l            := 44*cm*t;
+shoulder_slope_b  := 46.5*cm*t; % NEW!!!
+waist_arc_b       := 22*cm*t;   % NEW!!!
+back_neck       := 10.5*cm*t;
+back_arc        := 23*cm*t;
+across_back     := 16.5*cm*t;
 
 vardef setSleeve =		
 	% Points
@@ -137,6 +148,73 @@ vardef setFront =
 
 enddef;
 
+
+vardef setBack =		
+	% Points
+	pair r[];
+	r1 = (0,full_l);                                                             % A
+	r2 = (0,0);                                                                  % B
+	r3 = (across_shoulder,full_l_b);                                             % C
+	r4 = (0,cb_l);                                                               % D
+	r5 = (waist_arc_b + 1.5*inch,0);                                             % E
+	r6 = (dart_pl,0);                                                            % G'
+	r7 = (dart_pl + 1.5*inch,0);                                                 % H'
+	r8 := 1/2[r6,r7];                                                            % I
+	r9 = (0,side_seam_l);                                                        % J
+	r10 = (back_arc + 1/8*inch,side_seam_l);                                     % K
+	r11 = (xpart r8,side_seam_l);                                                % L
+	r12 = (xpart r8,ypart r11-3/4*inch);                                         % M
+	path v;
+	v := r12--r6;
+	r13 = r6 + 1/8*inch*unitvector(direction 0 of v);                            % G
+	b1 = angle direction 0 of v - 90;
+	v := r12--r7;
+	r14 = r7 + 1/8*inch*unitvector(direction 0 of v);                            % H
+	b2 = angle direction 0 of v - 90;
+	r15 = (across_shoulder,sqrt(shoulder_slope_b**2 - across_shoulder**2));      % N'
+	r16 = (back_neck,full_l_b);                                                  % O
+	v := fullcircle scaled (2*(shoulder_l+1.5*inch)) shifted (back_neck, full_l_b);  % scaled demands the DIAMETER, NOT the RADIUS!!!
+	path w;
+	w := fullcircle scaled (2*shoulder_slope_b) shifted (0,0);
+	z = (subpath (6,8) of v) intersectionpoint (subpath (0,2) of w);
+	r17 = z;                                                                     % N
+	%show arclength(r17--r16);
+	%show shoulder_l + 1.5*inch;
+	%show arclength(r17--r2);
+	%show shoulder_slope_b;
+	v := r17--r16;
+	b3 = angle direction 0 of v;
+	r18 = r16 + whatever*dir(b3+90) = whatever[r4,(infinity,ypart r4)];          % P
+	v := r16--r18;
+	b4 = angle direction 0 of v;
+	b5 = (180+b4)/2;
+	r19 = r18 + 1/2*inch*dir(180-b5);                                            % Q
+	r20 = 1/2[r16,r17];                                                          % R
+	v := r20--r12;
+	r21 = r20 + 3*inch*unitvector(direction 0 of v);                             % S
+	v := r16--r17;
+	r22 = r20 - 1/4*inch*unitvector(direction 0 of v);                           % T'
+	r23 = r20 + 1/4*inch*unitvector(direction 0 of v);                           % U'
+	r24 = r21 + (arclength(r21--r22) + 1/8*inch)*unitvector(direction 0 of (r21--r22)); % T
+	b6 = angle direction 0 of (r21--r24) - 90;
+	r25 = r21 + (arclength(r21--r24))*unitvector(direction 0 of (r21--r23));     % U
+	b7 = angle direction 0 of (r21--r25) - 90;
+	r26 = r10 + 1/2*inch*unitvector(direction 0 of (r10--r5));                   % V
+	r27 = 1/2[r9,r4] + 3/4*inch*down;                                            % W
+	r28 = (across_back + 3/16*inch, ypart r27);                                  % X
+	b8 = angle direction 0 of (r26--r5) + 90;
+	
+	% Paths
+	path back_sleeve;
+	path back;
+	back_sleeve := r17..r28..{dir b8}r26;
+	back := back_sleeve & r26--r5 & r5{dir 180}..{dir b2}r14 & r14--r12--r13 & r13{dir b1}..{dir 180}r2 & r2--r4 & r4{dir 0}..r19..r16 & r16..{dir b6}r24 & r24--r21--r25 & r25{dir b7}..r17;                   
+
+	% Curve arc length
+	arcl_back := arclength(back_sleeve);
+	
+enddef;
+		
 		
 % Draw figures
 
@@ -153,19 +231,31 @@ endfig;
 beginfig(2);
 	setFront;
 	draw front;
-	draw p[4] withpen pencircle scaled 3;
-	draw p[7] withpen pencircle scaled 3;
-	draw p[8] withpen pencircle scaled 3;
+	%draw p[4] withpen pencircle scaled 3;
+	%draw p[7] withpen pencircle scaled 3;
+	%draw p[8] withpen pencircle scaled 3;
 	%draw p[14] withpen pencircle scaled 3;
 	%draw p[15] withpen pencircle scaled 3;
 	%draw p[16] withpen pencircle scaled 3;
 	%draw p[17] withpen pencircle scaled 3;
 endfig;
 
+
+beginfig(3);
+	setBack;
+	draw back;
+endfig;
+
+
 % Print arc lengths
 %show arcl_sl_b*2.54/(72*t);  % sleeve back part (in cm, rescaled)
 show arcl_sl_f/(72*t);  % sleeve: front part (in inch, rescaled)
 show arcl_front/(72*t); % front: sleeve part (in inch, rescaled)
+show arcl_sl_f/(72*t) - arcl_front/(72*t) - 3/8;
+
+show arcl_sl_b/(72*t);  % sleeve: back part (in inch, rescaled)
+show arcl_back/(72*t);  % back: sleeve part (in inch, rescaled)
+show arcl_sl_b/(72*t) - arcl_back/(72*t) - 3/8;
 
 show ypart p4;
 show ypart p7;
