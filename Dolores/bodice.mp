@@ -6,7 +6,7 @@
 
 input sarith;
 
-t := 1/9;         % Scaling factor (original size: t=1)
+t := 1/5;         % Scaling factor (original size: t=1)
 inch := 2.54cm*t;
 
 % Sleeve
@@ -31,13 +31,13 @@ waist_arc       := 27*cm*t;
 dart_pl         := bust_span - 3/4*inch;
 
 % Back
-full_l_b          := 46*cm*t;   % NEW!!!
-cb_l            := 44*cm*t;
-shoulder_slope_b  := 46.5*cm*t; % NEW!!!
-waist_arc_b       := 22*cm*t;   % NEW!!!
-back_neck       := 10.5*cm*t;
-back_arc        := 23*cm*t;
-across_back     := 16.5*cm*t;
+full_l_b          := 46*cm*t;
+cb_l              := 44*cm*t;
+shoulder_slope_b  := 46.5*cm*t;
+waist_arc_b       := 22*cm*t;
+back_neck         := 10.5*cm*t;
+back_arc          := 23*cm*t;
+across_back       := 16.5*cm*t;
 
 vardef setSleeve =		
 	% Points
@@ -95,9 +95,12 @@ vardef setFront =
 	p2 = (0,0);                                                                  % B
 	p3 = (-across_shoulder, full_l);                                             % C
 	p4 = (0,cf_l - 3/4*inch);                                                    % D
-	p5 = (-across_shoulder, sqrt((shoulder_slope**2) - (across_shoulder**2)));   % E
-	p6 = (xpart p3 + sqrt((shoulder_l**2)-((ypart p3 - ypart p5)**2)), full_l);  % F
 	path q;
+	q := fullcircle scaled (2*shoulder_slope) shifted (0,0);
+	z = (subpath (2,4) of q) intersectionpoint (p3--(xpart p3,-infinity));
+	p5 = z;                                                                      % E
+	q := fullcircle scaled (2*shoulder_l) shifted z;
+	p6 = (subpath (0,2) of q) intersectionpoint (p3--(0,ypart p3));              % F
 	q := p5--p6;
 	a1 = angle direction 1 of q;
 	p7 = p6 + whatever*dir(a1+90) = whatever[p4,(-infinity,ypart p4)];           % G
@@ -113,8 +116,10 @@ vardef setFront =
 	p13 = p5 + bust_depth* unitvector(direction 0 of q);                         % N
 	p14 = p13 + whatever*right = whatever[p2,p4];                                % O
 	p15 = p14 + bust_span*left;                                                  % P
-	p16 = (xpart p15 - sqrt(((bust_arc-bust_span)**2)-((ypart p10 - ypart p15)**2)), ypart p10);             % Q
-	p17 = (xpart p15 - sqrt(((bust_arc + 1/2*inch - bust_span)**2)-((ypart p9 - ypart p15)**2)), ypart p9);  % R
+	q := fullcircle scaled (2*(bust_arc-bust_span)) shifted p15;
+	p16 = (subpath (2,6) of q) intersectionpoint (p10--(-infinity,ypart p10));   % Q
+	q := fullcircle scaled (2*(bust_arc + 1/2*inch - bust_span)) shifted p15;
+	p17 = (subpath (2,6) of q) intersectionpoint (p9--(-infinity,ypart p9));     % R
 	q := p17--p16;
 	p18 = p17 + side_seam_l * unitvector(direction 0 of q);                      % S
 	p19 = p17 + 1/2*inch * unitvector(direction 0 of q);                         % T
@@ -171,7 +176,6 @@ vardef setBack =
 	v := r12--r7;
 	r14 = r7 + 1/8*inch*unitvector(direction 0 of v);                            % H
 	b2 = angle direction 0 of v - 90;
-	r15 = (across_shoulder,sqrt(shoulder_slope_b**2 - across_shoulder**2));      % N'
 	r16 = (back_neck,full_l_b);                                                  % O
 	v := fullcircle scaled (2*(shoulder_l+1.5*inch)) shifted (back_neck, full_l_b);  % scaled demands the DIAMETER, NOT the RADIUS!!!
 	path w;
@@ -221,23 +225,12 @@ enddef;
 beginfig(1);
 	setSleeve;
 	draw sleeve_b..sleeve_f & sleeve_r;
-	%draw r[9] withpen pencircle scaled 3;
-	%draw r[10] withpen pencircle scaled 3;
-	%draw r[23] withpen pencircle scaled 3;
-	%draw r[24] withpen pencircle scaled 3;
 endfig;
 
 
 beginfig(2);
 	setFront;
 	draw front;
-	%draw p[4] withpen pencircle scaled 3;
-	%draw p[7] withpen pencircle scaled 3;
-	%draw p[8] withpen pencircle scaled 3;
-	%draw p[14] withpen pencircle scaled 3;
-	%draw p[15] withpen pencircle scaled 3;
-	%draw p[16] withpen pencircle scaled 3;
-	%draw p[17] withpen pencircle scaled 3;
 endfig;
 
 
@@ -256,6 +249,3 @@ show arcl_sl_f/(72*t) - arcl_front/(72*t) - 3/8;
 show arcl_sl_b/(72*t);  % sleeve: back part (in inch, rescaled)
 show arcl_back/(72*t);  % back: sleeve part (in inch, rescaled)
 show arcl_sl_b/(72*t) - arcl_back/(72*t) - 3/8;
-
-show ypart p4;
-show ypart p7;
