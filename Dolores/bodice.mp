@@ -146,7 +146,7 @@ vardef setFront =
 	path front_sleeve;
 	path front;
 	front_sleeve := p19{dir a6}..p9..p12..p5;
-	front := p18--p19 & front_sleeve & p5--p6{dir a2}..p8..{dir 0}p4--p2--p21--p15--p23 & p23{dir a8}..{dir a5}p18;                   
+	front := p18--p19 & front_sleeve & p5--p6 & p6{dir a2}..p8..{dir 0}p4 & p4--p2--p21--p15--p23 & p23{dir a8}..{dir a5}p18;                   
 	
 	% Curve arc length
 	arcl_front := arclength(front_sleeve);
@@ -177,7 +177,7 @@ vardef setBack =
 	r14 = r7 + 1/8*inch*unitvector(direction 0 of v);                            % H
 	b2 = angle direction 0 of v - 90;
 	r16 = (back_neck,full_l_b);                                                  % O
-	v := fullcircle scaled (2*(shoulder_l+1.5*inch)) shifted (back_neck, full_l_b);  % scaled demands the DIAMETER, NOT the RADIUS!!!
+	v := fullcircle scaled (2*(shoulder_l+0.5*inch)) shifted (back_neck, full_l_b);  % scaled demands the DIAMETER, NOT the RADIUS!!!
 	path w;
 	w := fullcircle scaled (2*shoulder_slope_b) shifted (0,0);
 	z = (subpath (6,8) of v) intersectionpoint (subpath (0,2) of w);
