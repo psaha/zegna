@@ -13,28 +13,28 @@ DF := lower_arm/2 + 1*inch/4;
 
 vardef setParamPoints(expr u) =		
 	% Points
-	pair q[];
-	q1 = (0,AB/2);                        % A
-	q2 = (-AB,0);                         % E mirrored
-	q3 = (AB,0);                          % E
-	q4 = (-DF,-(sleeve_length-AB/2));     % F mirrored
-	q5 = (DF,-(sleeve_length-AB/2));      % F
-	q6 := 1/4[q1,q3];                     % c
-	q7 := 1/2[q1,q3];                     % b
-	q8 := 3/4[q1,q3];                     % a
-	alpha := -angle(q3-q1);               % angle between AB and AE (alpha>0)
-	q9 := q6 + inch/2*dir(90-alpha);      % g
-	q10 := q7 + inch/4*dir(90-alpha);     % f
-	q11 := q8 + inch/2*dir(90-alpha+180); % d
-	q12 := q8 + inch/4*dir(90-alpha+180); % e
-	q13 := (-xpart q9,ypart q9);          % g mirrored
-	q14 := (-xpart q7,ypart q7);          % b mirrored
-	q15 := (-xpart q11,ypart q11);        % d mirrored
+	pair p[];
+	p1 = (0,AB/2);                        % A
+	p2 = (-AB,0);                         % E mirrored
+	p3 = (AB,0);                          % E
+	p4 = (-DF,-(sleeve_length-AB/2));     % F mirrored
+	p5 = (DF,-(sleeve_length-AB/2));      % F
+	p6 := 1/4[p1,p3];                     % c
+	p7 := 1/2[p1,p3];                     % b
+	p8 := 3/4[p1,p3];                     % a
+	alpha := -angle(p3-p1);               % angle between AB and AE (alpha>0)
+	p9 := p6 + inch/2*dir(90-alpha);      % g
+	p10 := p7 + inch/4*dir(90-alpha);     % f
+	p11 := p8 + inch/2*dir(90-alpha+180); % d
+	p12 := p8 + inch/4*dir(90-alpha+180); % e
+	p13 := (-xpart p9,ypart p9);          % g mirrored
+	p14 := (-xpart p7,ypart p7);          % b mirrored
+	p15 := (-xpart p11,ypart p11);        % d mirrored
 enddef;
 
 beginfig(1);
 	u := 0cm;
 	setParamPoints(u);
-	path sleeve; sleeve := q3..q12..q10..q9..q1..q13..q14..q15..q2--q4--q5--q3;
+	path sleeve; sleeve := p3..p12..p10..p9..p1..p13..p14..p15..p2--p4--p5--p3;
 	draw sleeve;
 endfig;
