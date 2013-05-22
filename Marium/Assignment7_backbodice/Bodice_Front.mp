@@ -4,9 +4,9 @@
 %*************************************************************
 input sarith;
 
-ease := 2*inch; %ease is taken of 2 inches
 t := 1; % scaling factor of the square
 inch := 2.54*t; % since 1 inch = 2.54; This provides the space to stich
+ease := 2*inch; %ease is taken of 2 inches
 %***************************************************************
 
 %========================================		
@@ -110,6 +110,12 @@ beginfig(1)
 	draw ONP withcolor .5(black+white);
 	draw front;
 	draw f5--f8 withcolor blue;
+	%%% Matching front armhole with the sleeve
+	message "================================";
+	message "Arm hole for front";
+	show arclength(f6..f15..f22);
+	message "================================";
+	
 
 
 

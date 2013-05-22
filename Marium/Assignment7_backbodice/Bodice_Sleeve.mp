@@ -2,11 +2,11 @@
 %Drawing pattern of Sleeve Bodice/Slopper
 %Reference : http://www.madalynne.com/how-to-draft-a-sleeve-sloper-update
 %*************************************************************
+input sarith;
 
-ease := 2*inch; %ease is taken of 2 inches
-t := 1; % scaling factor of the square
+t := 1; % scaling factor of the square 1 X 1;
 inch := 2.54*t; % since 1 inch = 2.54; This provides the space to stich
-
+ease := 2*inch; %ease is taken of 2 inches
 %***************************************************************
 
 %========================================		
@@ -67,12 +67,17 @@ beginfig(1)
 	sleeve_guide := s2--s1;
 	IJ := s9--s10;
 	front_sleeve := s1..s17..s20..s18..s6;
-	back_sleeve := s1..s16..s19..s15..s5--s9--s22--s23--s24--s25--s26--s10--s6;
+	%back_sleeve := s1..s16..s19..s15..s5--s9--s22--s23--s24--s25--s26--s10--s6;
+	back_sleeve := s1..s16..s19..s15..s5--s9--s22--s23--s24--s25--s26--s6;
 	draw sleeve_guide withcolor 0.5(black+white);
 	draw IJ withcolor 0.5(black+white);
 	draw front_sleeve;
 	draw back_sleeve;
-
-
+	
+	%%% Matching sleeve armhole with the shirt
+	message "================================";
+	message "Arm hole for sleeve";
+	show arclength(s15..s19..s16..s1..s17..s20..s18);
+	message "================================";
 	endfig;
 end;
