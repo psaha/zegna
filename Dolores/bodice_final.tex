@@ -1,0 +1,40 @@
+\documentclass[portrait,a0b,final]{a0poster}  % Can print A0
+%\documentclass[portrait,a1,final]{a0poster}   % Can print A1
+%\documentclass{article}                       % Can print A4
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{ifpdf}
+\ifpdf
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+\begin{document}
+
+%\section*{Drawing a bodice front/back sloper}
+% Based on 
+% http://www.madalynne.com/how-to-draft-a-sleeve-sloper-update
+% http://www.madalynne.com/how-to-draft-a-front-bodice-sloper-update
+% http://www.madalynne.com/how-to-draft-a-back-bodice-sloper-update
+
+\begin{figure}[!htp]
+\centering
+\subfigure % title for subfigure 1
+{
+		\includegraphics[]{bodice.2}
+}
+\subfigure % title for subfigure 2
+{
+		\includegraphics[]{bodice.3}
+}
+
+\subfigure % title for subfigure 2
+{
+		\includegraphics{bodice.1}
+}
+\end{figure}
+
+
+
+
+
+\end{document}
