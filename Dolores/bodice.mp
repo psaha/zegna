@@ -4,45 +4,40 @@
 %% http://www.madalynne.com/how-to-draft-a-front-bodice-sloper-update
 %% http://www.madalynne.com/how-to-draft-a-back-bodice-sloper-update
 
-input sarith;
-
-t := 1/3;         % Scaling factor (original size: t=1)
+t := 1;         % Scaling factor (original size: t=1)
 inch := 2.54cm*t;
 
 % Sleeve
-overarm_l := 65*cm*t;
-elbow_l   := 38*cm*t;
+overarm_l := 60*cm*t;
+elbow_l   := 36*cm*t;
 bicep     := 35*cm*t + 1*inch;
-wrist     := 22.5*cm*t;
+wrist     := 23*cm*t;
 cap_h     := 7.5*inch;   %% US size 0: 5.75, size 2: 6, size 4: 6.25, size 6: 6.5, size 8: 6.75, size 10: 7, size 12: 7.25
 
 % Front
-full_l          := 49.5*cm*t;
-cf_l            := 40.5*cm*t;
-shoulder_l      := 9*cm*t;
-across_shoulder := 34/2*cm*t;
-armhole_depth   := 16.5*cm*t;
+full_l          := 48*cm*t;
+cf_l            := 40*cm*t;
+shoulder_l      := 13*cm*t;
+across_shoulder := 41/2*cm*t;
+armhole_depth   := 18*cm*t;
 bust_depth      := 27*cm*t;
-bust_span       := 24/2*cm*t;
-bust_arc        := 18*cm*t + bust_span;
-shoulder_slope  := 51.5*cm*t;
-side_seam_l     := 23*cm*t;
-waist_arc       := 27*cm*t;
+bust_span       := 21/2*cm*t;
+bust_arc        := 19*cm*t + bust_span;
+shoulder_slope  := 47.5*cm*t;
+side_seam_l     := 17*cm*t;
+waist_arc       := 27.5*cm*t;
 dart_pl         := bust_span - 3/4*inch;
 
 % Back
-full_l_b          := 46*cm*t;
-cb_l              := 44*cm*t;
-shoulder_slope_b  := 46.5*cm*t;
-waist_arc_b       := 22*cm*t;
-back_neck         := 10.5*cm*t;
-back_arc          := 23*cm*t;
-across_back       := 16.5*cm*t;
+full_l_b          := 41.5*cm*t;
+cb_l              := 39.5*cm*t; % Looks nice if difference between full_l_b and cb_l is not less than 2cm!
+shoulder_slope_b  := 43*cm*t;
+waist_arc_b       := 20.5*cm*t;
+back_neck         := 9*cm*t;
+back_arc          := 24*cm*t;
+across_back       := 20*cm*t; % Adjust this measurement in order to obtain nice curve! Shouldn't have too big an influence.
 
-
-b11 := 0;
 b13 := 0;
-
 
 vardef setSleeve =		
 	% Points
@@ -69,23 +64,111 @@ vardef setSleeve =
 	r20 := 1/2[r17,r18];                    % T
 	r21 := 1/2[r4,r9];                      % U
 	r22 := r21 + 3/8*inch*dir(270);         % V
+	
+	r23 := r9 + 1*inch*unitvector(direction 0 of (r9--r7));  % W
+	r24 := r7 + 5/8*inch*right;             % X
+	r25 := r23 + (arclength(r6--r8)-arclength(r5--r9))*unitvector(direction 0 of (r23--r24));  % Y
 	path u;
 	path v;
-	u := fullcircle scaled (2*1*inch) shifted r9;
-	v := fullcircle scaled (2*arclength(r9--r22)) shifted r22;
-	r23 = (subpath (6,8) of u) intersectionpoint (subpath (4,6) of v);  % W (new!)
-	u := r9--r22;  % I-V
-	v := r9--r5;   % I-E
-	c1 = angle direction 1 of u;
-	c2 = angle direction 1 of v;
-	c3 = -c1 + c2; % incoming angle to dart
+	
+	% Dart construction: Start
+	r23 := r22 + arclength(r22--r9)*unitvector(direction 0 of (r22--r23));     % W (verlängert)
+	u := r9--r5;  % I-E
+	v := r9--r22; % I-V
+	in := angle direction 0 of u + abs(angle direction 0 of v); % incoming angle at dart
 	u := r23--r22; % W-V
-	c4 = -(180 - c3 - angle direction 1 of u); % outgoing angle of dart (180 - incoming angle)
-	r24 = r23 + whatever*dir(c4) = whatever[r2,(-infinity,ypart r2)]; % X (new!)
-	r25 := r24 + 1*inch*dir(c4);                 % Y (new!)
+	v := r23--r25; % W-Y
+	out := angle direction 0 of u + abs(angle direction 0 of v);  % outcoming angle at dart
+		
+	% translation of points I and W by the same length -> sum of incoming and outcoming angle should be decreased until 180 degrees
+	eps := 1;  % result should be: incoming angle + outcoming angle - 180° < eps°
+	s := 0.01;  % increase of length in percent: if too large, procedure fails (t-1: in + out > 180, t: in + out < 180 and abs(in + out - 180)>eps!!!)
+	pair iter[];
+	iter1 := r9;  % I
+	iter2 := r23; % W
+	%counter := 0;
+	
+	%forever: exitif((abs(in + out - 180) < eps) or (counter>50));
+	forever: exitif(abs(in + out - 180) < eps);
+		iter3 := iter1 + s*arclength(r22--iter1)*unitvector(direction 0 of (r22--iter1));  % New I
+		iter4 := iter2 + s*arclength(r22--iter2)*unitvector(direction 0 of (r22--iter2));  % New W
+		in := angle direction 0 of (iter1--r5) + abs(angle direction 0 of (iter1--r22));   % incoming angle at dart
+		out := angle direction 0 of (iter2--r22) + abs(angle direction 0 of (iter2--r25)); % outcoming angle at dart
+		%show in+out;
+	
+		if (in + out > 180): iter1 := iter3; iter2 := iter4; % accept new solution
+		else: s:=s*0.5; fi;                                  % otherwise decrease step length
+		%counter := counter + 1;
+	endfor;
+	
+	r9  := iter1;  % I
+	r23 := iter2;  % W
+	% Dart construction: End
+	
 	u := fullcircle scaled (2*wrist) shifted r25;
-	z = (subpath (0,2) of u) intersectionpoint (r8--(infinity,ypart r8));
+	v := fullcircle scaled (2*(arclength(r5--r9) + arclength(r23--r25))) shifted r6;
+	z = (subpath (0,8) of u) intersectionpoint (subpath (4,8) of v);
 	r26 = z;                                     % Z (new!)	
+	
+	% Alternative version!	
+	%u := fullcircle scaled (2*1*inch) shifted r9;
+	%v := fullcircle scaled (2*arclength(r9--r22)) shifted r22;
+	%r23 = (subpath (6,8) of u) intersectionpoint (subpath (4,6) of v);  % W (new!)
+	%u := r9--r22;  % I-V
+	%v := r9--r5;   % I-E
+	%c1 = angle direction 1 of u;
+	%c2 = angle direction 1 of v;
+	%c3 = -c1 + c2; % incoming angle to dart
+	%u := r23--r22; % W-V
+	%c4 = -(180 - c3 - angle direction 1 of u); % outgoing angle of dart (180 - incoming angle)
+	%r24 = r23 + whatever*dir(c4) = whatever[r2,(-infinity,ypart r2)]; % X (new!)
+	%r25 := r24 + 1*inch*dir(c4);                 % Y (new!)
+	%u := fullcircle scaled (2*wrist) shifted r25;
+	%v := fullcircle scaled (2*(arclength(r5--r9) + arclength(r23--r25))) shifted r6;
+	%z = (subpath (0,8) of u) intersectionpoint (subpath (6,8) of v);
+	%r26 = z;                                     % Z (new!)
+	% End of alternative version!
+		
+	% Sleeve cap ease
+	eq1 := arclength(r5{dir 0}..r15..r19..r16..{dir 0}r1) - 3/8*inch - arcl_back;
+	eq2 := arclength(r1{dir 0}..r17..r20..r18..{dir 0}r6) - 3/8*inch - arcl_front;
+	eps := 0.1; % absolute error of arclength differences
+	s   := 1;  % step length
+	pair iter[];
+	iter1 := r1;  % A
+	counter := 0;
+	
+	if ((eq1>0) and (eq2>0)):
+		forever: exitif((eq1<=eps) or (eq2<=eps));
+			iter2 := iter1 + s*down;            % New A
+			iter3 := iter2 + bicep/8*dir(180);  % New M
+			iter4 := iter2 + bicep/8*dir(0);    % New N
+			iter5 := iter3 + 5/8*inch*dir(270); % New P
+			iter6 := iter4 + 3/8*inch*dir(270); % New Q
+			iter7 := 1/2[r15,iter5];            % New S
+			iter8 := 1/2[iter6,r18];            % New T
+			
+			new_eq1 := arclength(r5{dir 0}..r15..iter7..iter5..{dir 0}iter2) - 3/8*inch - arcl_back;  % New eq1
+			new_eq2 := arclength(iter2{dir 0}..iter6..iter8..r18..{dir 0}r6) - 3/8*inch - arcl_front; % New eq2
+			
+			if ((new_eq1>0) and (new_eq2>0)): iter1 := iter2; eq1 := new_eq1; eq2 := new_eq2;     % Accept new solution
+			else: s:=s*0.5; fi;                                                                   % Decrease step length
+		endfor;
+	
+		r1  := iter2;  % A
+		r13 := iter3;  % M
+		r14 := iter4;  % N
+		r16 := iter5;  % P
+		r17 := iter6;  % Q
+		r19 := iter7;  % S
+		r20 := iter8;  % T
+		
+		if (eq1 > eps):
+			show arclength(r5--r1)/(72*t);
+			% Problem: even straight line is too long.. maybe measurement error???
+		fi;
+		
+	fi;
 	
 	% Paths
 	path sleeve_b;
@@ -93,12 +176,13 @@ vardef setSleeve =
 	path sleeve_r;
 	sleeve_b := r5{dir 0}..r15..r19..r16..{dir 0}r1;
 	sleeve_f := r1{dir 0}..r17..r20..r18..{dir 0}r6;
-	sleeve_r := r6--r26--r25--r23--r22--r9--r5;
+	sleeve_r := r6--r26 & r26{dir 180}..{dir 180}r25 & r25--r23--r22--r9--r5;
 	
 	% Curve arc lengths
 	arcl_sl_b := arclength(sleeve_b);
 	arcl_sl_f := arclength(sleeve_f);
-	show arclength(r5--r1)/(72*t);
+	
+	show (arclength(r6--r8) - arclength(r5--r9) - arclength(r23--r25))*2.54/(72*t);
 	
 enddef;
 
@@ -118,19 +202,50 @@ vardef setBack =
 	s10 = (back_arc + 1/8*inch,side_seam_l);                                     % K
 	s11 = (xpart s8,side_seam_l);                                                % L
 	s12 = (xpart s8,ypart s11-3/4*inch);                                         % M
+	
+	% Dart construction: Start
 	path v;
-	v := s12--s6;
-	s13 = s6 + 1/8*inch*unitvector(direction 0 of v);                            % G
-	b1 = angle direction 0 of v - 90;
-	v := s12--s7;
-	s14 = s7 + 1/8*inch*unitvector(direction 0 of v);                            % H
-	b2 = angle direction 0 of v - 90;
+	v := s6--s12;  % G'-M
+	in := 180 - angle direction 0 of v; % incoming angle at dart
+	v := s7--s12;  % H'-M
+	out := angle direction 0 of v;      % outcoming angle at dart
+	
+	% translation of points G' and H' by the same length -> sum of incoming and outcoming angle should be decreased until 180 degrees
+	eps := 0.5;  % result should be: incoming angle + outcoming angle - 180° < eps°
+	s := 0.1;  % increase of length in percent
+	pair iter[];
+	iter1 := s6; % G'
+	iter2 := s7; % H'
+	
+	forever: exitif(abs(in + out - 180) < eps);
+		iter3 := iter1 + s*arclength(s12--iter1)*unitvector(direction 0 of (s12--iter1)); % New G'
+		iter4 := iter2 + s*arclength(s12--iter2)*unitvector(direction 0 of (s12--iter2)); % New H'
+		in := angle direction 0 of (iter3--s2) - angle direction 0 of (iter3--s12);   % incoming angle at dart
+		out := angle direction 0 of (iter4--s12) - angle direction 0 of (iter4--s5);  % outcoming angle at dart
+		%show in + out;
+		
+		if (in + out > 180): iter1 := iter3; iter2 := iter4; % accept new solution
+		else: s:=s*0.5; fi;                                  % otherwise decrease step length
+	endfor;
+	
+	s13 := iter1;  % G
+	s14 := iter2;  % H
+	
+	b1 = angle direction 0 of (s12--s13) - 90;  % incoming angle of curve at G (such that there is a right angle)
+	b2 = angle direction 0 of (s12--s14) - 90;  % incoming angle of curve at H (such that there is a right angle)
+	% Dart construction: End
+	
 	s16 = (back_neck,full_l_b);                                                  % O
 	v := fullcircle scaled (2*(shoulder_l+0.5*inch)) shifted (back_neck, full_l_b);  % scaled demands the DIAMETER, NOT the RADIUS!!!
 	path w;
 	w := fullcircle scaled (2*shoulder_slope_b) shifted (0,0);
-	z = (subpath (6,8) of v) intersectionpoint (subpath (0,2) of w);
-	s17 = z;                                                                     % N
+	
+	%OLD z = (subpath (6,8) of v) intersectionpoint (subpath (0,2) of w);
+	%OLD s17 = z;                                                                     % N
+	
+	s30 := (subpath (0,2) of w) intersectionpoint (s3--(xpart s3,-infinity));     % N'
+	s17 := (subpath (6,8) of v) intersectionpoint ((-infinity,ypart s30)--(infinity,ypart s30));  % N  According to post on blog: Length B-N' does not need to be the same as B-N!!!
+	
 	v := s17--s16;
 	b3 = angle direction 0 of v;
 	s18 = s16 + whatever*dir(b3+90) = whatever[s4,(infinity,ypart s4)];          % P
@@ -141,6 +256,8 @@ vardef setBack =
 	s20 = 1/2[s16,s17];                                                          % R
 	v := s20--s12;
 	s21 = s20 + 3*inch*unitvector(direction 0 of v);                             % S
+	
+	% Dart construction: Start
 	v := s16--s17;
 	s22 = s20 - 1/4*inch*unitvector(direction 0 of v);                           % T'
 	s23 = s20 + 1/4*inch*unitvector(direction 0 of v);                           % U'
@@ -164,35 +281,43 @@ vardef setBack =
 		iter4 := iter2 + s*arclength(s21--iter2)*unitvector(direction 0 of (s21--iter2)); % New U''
 		in := 360 - angle direction 0 of (iter3--s16) - abs(angle direction 0 of (iter3--s21));   % incoming angle at dart
 		out := abs(angle direction 0 of (iter4--s21)) - abs(angle direction 0 of (iter4--s17));   % outcoming angle at dart
-		
 		%show in + out;
 		
 		if (in + out > 180): iter1 := iter3; iter2 := iter4; % accept new solution
 		else: s:=s*0.5; fi;                                  % otherwise decrease step length
 	endfor;
 	
-	s24 := iter1;
-	s25 := iter2;
+	s24 := iter1;  % T
+	s25 := iter2;  % U
+	% Dart construction: End
 	
 	b6 = angle direction 0 of (s21--s24) - 90;
 	b7 = angle direction 0 of (s21--s25) - 90;
 	s26 = s10 + 1/2*inch*unitvector(direction 0 of (s10--s5));                   % V
 	s27 = 1/2[s9,s4] + 3/4*inch*down;                                            % W
 	s28 = (across_back + 3/16*inch, ypart s27);                                  % X
-	b8 = angle direction 0 of (s26--s5) + 90;
+	s31 := s26 + 1/8*inch*right;                                                 % Y
+	%b8 = angle direction 0 of (s26--s5) + 90;
+	b8 = angle direction 0 of (s31--s5) + 90;
 	
 	% Angles at neck for smooth transition
-	v := s18--s16;
+	v := s18--s16;  % P--O
 	b9 := angle direction 0 of v;  % Angle neck transition (back): right angle
-	b10 = angle direction 0 of (s17--s16);	
-	b12 = angle direction 0 of (s17..s28..{dir b8}s26);
-	b13 := -b12 - (180-b10);  % Angle sleeve transition (back) --> corresponding angle at front has to be 180-b13
+	%b10 = angle direction 0 of (s17--s16);               % N--O
+	b10 = angle direction 0 of (s24--s16);               % T--O
+	b11 = angle direction 0 of (s17--s25);               % N--U
+	%b12 = angle direction 0 of (s17..s28..{dir b8}s26);  % N..X..V
+	b12 = angle direction 0 of (s17..s28..{dir b8}s31);  % N..X..Y
+	b13 := -b12 - (180-b11);  % Angle sleeve transition (back) --> corresponding angle at front has to be 180-b13
 	
 	% Paths
 	path back_sleeve;
 	path back;
-	back_sleeve := s17..s28..{dir b8}s26;
-	back := back_sleeve & s26--s5 & s5{dir 180}..{dir b2}s14 & s14--s12--s13 & s13{dir b1}..{dir 180}s2 & s2--s4 & s4{dir 0}..s19..{dir b9}s16 & s16--s24 & s24--s21--s25 & s25--s17;	
+	%back_sleeve := s17..s28..{dir b8}s26;
+	back_sleeve := s17..s28..{dir b8}s31;
+	%back := back_sleeve & s26--s5 & s5{dir 180}..{dir b2}s14 & s14--s12--s13 & s13{dir b1}..{dir 180}s2 & s2--s4 & s4{dir 0}..s19..{dir b9}s16 & s16--s24 & s24--s21--s25 & s25--s17;	
+	%back := back_sleeve & s26--s5 & s5{dir 180}..{dir b2}s14 & s14--s12--s13 & s13{dir b1}..{dir 180}s2 & s2--s4 & s4{dir 0}..s19..{dir b9}s16 & s16--s24 & s24--s21--s25 & s25--s17;	
+	back := back_sleeve & s31--s5 & s5{dir 180}..{dir b2}s14 & s14--s12--s13 & s13{dir b1}..{dir 180}s2 & s2--s4 & s4{dir 0}..s19..{dir b9}s16 & s16--s24 & s24--s21--s25 & s25--s17;	
 
 	% Curve arc length
 	arcl_back := arclength(back_sleeve);
@@ -254,14 +379,15 @@ vardef setFront =
 	a11 = angle direction 0 of q + 90;	
 	
 	% Angles at neck for smooth transition
-	q := p5--p6;
+	q := p5--p6; % E--F
 	a9 = angle direction 0 of q;
 	a10 := (180 - b13) + a9;      % Angle sleeve transition (front)
 		
 	% Paths
 	path front_sleeve;
 	path front;
-	front_sleeve := p24{dir a6}..p9..p12..{dir a10}p5;
+	%front_sleeve := p24{dir a6}..{dir 90}p12..{dir a10}p5;  % Force vertical tangent at point M
+	front_sleeve := p24{dir a6}..p12..{dir a10}p5;
 	front := p18--p24 & front_sleeve & p5--p6 & p6{dir a2}..p8..{dir 0}p4 & p4--p2 & p2..{dir a11}p21 & p21--p15--p23 & p23{dir a8}..{dir a5}p18;	
 	
 	% Curve arc length
@@ -274,17 +400,28 @@ enddef;
 
 beginfig(2);
 	setBack;
+	pickup pencircle scaled 3pt
 	draw back;
+	%draw s[17] withpen pencircle scaled 10;
+	%draw s[28] withpen pencircle scaled 10;
+	%draw s[31] withpen pencircle scaled 10;
 endfig;
 
 beginfig(3);
 	setFront;
+	pickup pencircle scaled 3pt
 	draw front;
+	%draw p[5] withpen pencircle scaled 10;
+	%draw p[9] withpen pencircle scaled 10;
+	%draw p[12] withpen pencircle scaled 10;
+	%draw p[24] withpen pencircle scaled 10;
 endfig;
 
 beginfig(1);
 	setSleeve;
+	pickup pencircle scaled 3pt
 	draw sleeve_b..sleeve_f & sleeve_r;
+	%draw r[5]--r[7];
 endfig;
 
 
