@@ -1,0 +1,41 @@
+My own measurement for Bodice Slopper :
+%% From the market perspective, I can get fit into both of 38-40(EU standard i.e highest S and Lowest M respectively)
+%% according to http://www.clothingattesco.com/size-guides/size-guide/page/sizeguide/
+
+For Front:
+==========
+1. Full Length = 47cm
+2. CF Length = 39cm
+3. Shoulder Slope = 45cm
+4. Shoulder Length = 7cm
+5. Across Shoulder = (28/2)cm  = 14cm
+6. Bust Span = 21 / 2 cm
+7. Bust Depth = 22cm
+8. Bust arc = 25.5cm (It is from CF to bust point to sideseam)
+Another one which I have used in the pattern is from bust point to sideseam plus Bust span
+So modified length is 16.5cm
+9. Armhole depth = 14cm + (2.54/2) cm = 16.77cm
+10. Side Seam = 27cm
+11. Waist arc = 22cm
+12. Dart Placement = Bust Span - (3/4 * 2.54)cm
+
+For Back:
+=========
+1. CB Length = 44cm
+2. Full Length = 45cm
+3. Shoulder Slope = 47cm
+4. Shoulder Length = 7cm
+5. Across Shoulder = 28cm/2 = 14cm
+6. Back Arc = 16cm
+7. Across Back = 13.5cm
+8. Side Seam = 27cm
+9. Back Neck = 36/4 cm
+10. Waist Arc = 18cm
+
+For Sleeve:
+===========
+1. Overarm Length = 53.5cm
+2. Elbow Length = 33cm
+3. Bicep = 27cm + 2.54 cm(for ease) = 29.54cm
+4. Wrist = 17cm
+5. Sleeve Cap Height = 6.5 * inch (6 size)
