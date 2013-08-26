@@ -25,7 +25,7 @@ overarm_length := 53.5*cm*t;
 elbow_length   := 33*cm*t;
 bicep     	   := 29.54*cm*t;
 wrist     	   := 17*cm*t;
-cap_height	   := 6.5*inch;   %% US size 0: 5.75, size 2: 6, size 4: 6.25, size 6: 6.5, size 8: 6.75, size 10: 7, size 12: 7.25
+cap_height	   := 6.25 *inch;   %% US size 0: 5.75, size 2: 6, size 4: 6.25, size 6: 6.5, size 8: 6.75, size 10: 7, size 12: 7.25
 
 %========================================
 

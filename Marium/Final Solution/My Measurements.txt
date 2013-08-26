@@ -1,5 +1,5 @@
-My own measurement for Bodice Slopper :
-%% From the market perspective, I can get fit into both of 38-40(EU standard i.e highest S and Lowest M respectively)
+My friend measurement for Bodice Slopper :
+%% From the market perspective, she gets fit into both of 38-40(EU standard i.e highest S and Lowest M respectively)
 %% according to http://www.clothingattesco.com/size-guides/size-guide/page/sizeguide/
 
 For Front:
@@ -38,4 +38,4 @@ For Sleeve:
 2. Elbow Length = 33cm
 3. Bicep = 27cm + 2.54 cm(for ease) = 29.54cm
 4. Wrist = 17cm
-5. Sleeve Cap Height = 6.5 * inch (6 size)
+5. Sleeve Cap Height = 6.25 * inch (4 size) as the tighest is to be considered.
