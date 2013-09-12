@@ -6,20 +6,21 @@
 \title{Using \MP { }to create a basic sewing pattern from individual measurements}
 %
 \author{%
-{Dolores Messer{\small $~^{1}$}, Marium Zeeshan{\small $~^{2}$}, Prasenjit Saha{\small $~^{3}$}}%
+{Dolores Messer{\small $~^{1}$}, Marium Zeeshan{\small $~^{1}$}, Prasenjit Saha{\small $~^{2}$}}%
 % add some space between author names and affils
 \vspace{1.6mm}\\
 \fontsize{10}{10}\selectfont\itshape
-$^{1}$\,$^{2}$\,$^{3}$\,Institute for Theoretical Physics, University of Zurich, Switzerland\\
+$^{1}$\,$^{1}$\,$^{2}$\,Institute for Theoretical Physics, University of Zurich, Switzerland\\
 \fontsize{9}{9}\selectfont\ttfamily\upshape
 \\
 $^{1}$\,dolores.messer@uzh.ch\\
-$^{2}$\,marium.zeeshan@uzh.ch\\
-$^{3}$\,psaha@physik.uzh.ch
+$^{1}$\,marium.zeeshan@uzh.ch\\
+$^{2}$\,psaha@physik.uzh.ch
 % add some space between email and affil
 \vspace{1.2mm}\\
 \fontsize{10}{10}\selectfont\rmfamily\itshape
-}
+\footnote{\small $~^{1}$} Both are first author}
+
 %%%%%%%
 
 \begin{document}
@@ -52,13 +53,60 @@ In addition, there are some projects in order to create open source pattern maki
 %%%%%%%
 \section{Our design in \MP { }}
 In this section, we present our design of bodice using \MP. Our design generate  patterns for front, back and sleeves. Since the sloper is usually made without seam allowances or style details, it is also considered in our design pattern as well.\\
-For the generation of pattern, we have measured two different sized women. It is imperative for the generation of correct pattern, the measurements should be taken vigilantly. We have iterate couple of times to get each measurement correctly \footnote{ The marking tools that we have employed during measurements are markers, tape, pins etc.}.The list of the parameters that we have considered in measurement(in cm) are listed in table 1. The steps taken for the measurement of front, back and sleeve part can be viewed on Madalynne webpage\cite{maddie}.
-\textit{table daaalna hai}
+For the generation of pattern, we have measured two different sized women. It is imperative for the generation of correct pattern, the measurements should be taken vigilantly. We have iterate couple of times to get each measurement correctly \footnote{ The marking tools that we have employed during measurements are markers, tape, pins etc.}.The list of the parameters that we have considered in measurement(in cm) are listed in table~\ref{tab:Table 1}.
+\newcolumntype{C}{>{\centering\arraybackslash}p{1em}}
+\begin{table}[!h]
+\centering
+    \caption{Table used for measurements}
+    \label{tab:Table 1}
 
-In the next sections, we describe how these three patterns are generated.
+    \begin{small}
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    {\bfseries } & \multicolumn{2} {c|} {\bfseries Measurements of Ladies} \\
+    \cline{2-3}
+    {\bfseries Parameters} & {\bfseries  First Woman}         & {\bfseries Second Woman}  \\
+    \hline	
+    \bfseries Front Bodice Sloper & \multicolumn{2}{c|}{} \\
+    \hline
+    Neck      	& 23		& 35		\\
+    \hline
+    Waist     	& 27		& 30 		 \\
+    \hline
+    Chest     	& 34 		& 36	     \\
+   \hline
+    Hip       	&	39		& 45			\\
+    \hline
+    Armhole   	& 		&		 		\\
+    \hline
+    Shoulders 	& 		&		 	  \\
+    \hline
+    \bfseries Back Bodice Sloper & \multicolumn{2}{c|}{} \\
+    \hline
+    SleeveLength  &		&		  		\\
+     \hline
+    Armhole   	& 		&		 		\\
+    \hline
+    Shoulders 	& 		&		 	  \\
+    \hline
+    \bfseries Sleeve Sloper & \multicolumn{2}{c|}{} \\
+    \hline
+    SleeveLength  &		&		  		\\
+     \hline
+    Armhole   	& 		&		 		\\
+    \hline
+    Shoulders 	& 		&		 	  \\
+    \hline
+
+	\hline
+    \end{tabular}
+    \end{small} 
+    \label{tab:Table 1}
+\end{table}
 %%%%%%%
 
-
+The steps taken for the measurement of front, back and sleeve part can be viewed on Madalynne webpage\cite{maddie}.In the next sections, we describe how these three patterns are generated.
+%%%%%%%
 \subsection{Drafting back bodice sloper}
 For back bodice design, as the back is symmetric, we generate pattern of the half portion of the back. The user can get the full pattern by folding the fabric of length equal to the length of sloper and by placing pattern on it. This approach will result in the full pattern of the back bodice. We have used the coordinate system feature of \MP{} to form pair of points based on the measurements and start interconnecting them to form the pattern as described by \cite{maddie} to generate main structure of the pattern. For the adjustments of certain point of measurements like intersection of shoulder length and shoulder slope, we used intersection of curves of magnitude equal to shoulder slope and shoulder length to locate a central point that satisfies both constraints of lengths. For the calculation of neck width in the back-bodice, we have used two options, one is to draw a directed angle of 90 degrees to the neck-depth guideline, another one is to use a dot product feature of \MP{} to generate a perpendicular. For generation of 45 degree angle, we also used two approaches of directed angle or of pythagoras theorem. For the generation of wedge shaped curve at the shoulder, it is important to make the lines that are coherent to the converging point, so we used a unit vector that has the direction of the center point to correctly converge left and right coordinating lines. It is imperative that these two lines that form wedge, are equal in length, to make sure we step-wise increment the shorter line to obtain a 180 degree angle which gives assurance of smooth transition between the two curves when they are joined on the fabric. The importance of correct measurement is important for the generation of correct size sloper, for this it should be ensured that the shoulder length of back after connection the wedge should be equal to the actual measurement of the shoulder length. We used a directed angle of 90 degrees in the path formation between armhole and side-seam curves to place them perpendicular on the pattern. Final shape of the back bodice sloper is in figure 2 \textit{back bodice figure}
 \\It is helpful to draw certain guiding lines inside the pattern to make the pattern easy to use and handle. Also it will be helpful to measure manually certain interior points to cross-check the actual measurement and measurement shown by the pattern. Also \MP{} has arithmetic overflow limitation, due to this, it was not feasible for us to use mathematical formulas for larger values. As a result of this, we used different variety of intersection of curves as an alternative.
@@ -77,7 +125,15 @@ For drafting of the sleeve part, unlike back and front bodice, we have considere
 %%%%%
 \subsection{Additional Details}
 Since \MP{} cannot be used with any IDE but it has the flexibility to use any type of file,which has feature of changing the extension to .mp,to write the code. Latex code is used to generate the end-results of \MP{} code. It only facilitates the user to use some mathematical formulas and geometry to obtain the desired results, but certain mathematical operators(for e.g. square root) is only working for certain range of numbers as stated earlier otherwise it would result in arithmetic overflow. Also there are few user-manual available which addresses some unique features of \MP{}.
-
+%%%%%%%
+\section{Result and Findings}
+We have tried two different approaches and techniques to generate same patterns. To test our design we used measurements of two ladies having different figure for the generation of their respective bodice slopers.The resulting pattern fits so nicely on both of them.Below are the findings from our design:
+\begin{itemize}
+\item	We have realized that there is design error in the method of measuring shoulder length in \cite{maddie}.Sometimes prominent raised shoulder bone is not identified correctly, which can impact the design very badly by providing extra visibility to arm-hole in drafting of front bodice.
+\item If the front shoulder-slope and the back shoulder slope are measured correctly then the end-result will get fit beautifully.
+\item In both of our patterns, we have examined that there is design error in the neck-depth of both front and the back bodice.It is difficult for both the ladies to get it fit into their heads.
+\item Adding notches in the sleeve cap would be a good move in the present design draft of sleeve sloper.
+\end{itemize}
 %%%%%%%
 \section{Conclusion}
 \textit{We show that \MP { }is suited to program a simple pattern. Whenever it gets too complicated, it might however not work so well. The bodice sloper was not so easy to create.}
